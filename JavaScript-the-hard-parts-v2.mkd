@@ -1,0 +1,42 @@
+# Javascript: The Hard Parts, v2
+
+## Javascript Principles
+
+### Definitions Learned
+
+**Execution context** - created to run the code of a function - has two parts (we've already seen them!)
+
+- thread of execution
+- memory
+
+**Call Stack**- the process on how JS runs code
+
+- Javascript keeps track of what function is currently running (where's the thread of execution)
+- Run a fn - add to call stack
+- Finish running hte function - JS removes it from call stack
+- Whatever is top of the call stack -that's the fn we're currently running
+
+**Higher Order Fns** - the outer fn that takes in a fn in our higher order fn
+**Callback Fn** - the function we insert is our callback function.
+
+## Functions and Callbacks
+
+- Fn help with keeping your code dry (don't repeat yourself)
+
+```javascript
+function tonSquared() {
+  return 10 * 10;
+}
+
+function nineSquared() {
+  return 9 * 9;
+}
+```
+
+the above is a bad practice as it's not ggdry, you can accomplish the same with the below and it'll be reusable and stored in the memory one time.
+
+```javascript
+function squareNum(number) {
+  return num * num;
+}
+```
