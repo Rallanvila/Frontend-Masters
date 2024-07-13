@@ -55,7 +55,7 @@ function squareNum(number) {
 - This owuld let our function definitions have an associated cache/persistant memory
 - But it all starts with us **returning a function from another function**
 
-```javascript
+```javascript 
 function createFunction() {
   function multiplyBy2(num) {
     return num * 2;
@@ -72,3 +72,22 @@ what's happening above:
 1. `createFunction` is being declared and being stored in the global memory and is returning the `fn` `multiplyBy2`
 2. `generateFunction` is being declared and since `createFunction()` is returning `multiplyBy2`, that is what `generateFunction` is. **it becomes the function it is returning and that is all. There is no corelation to the name declared whatsoever because it has left the execution context**
 3. `result` is executing `generateFunction` with 3, in essence doing `multiplyBy2(3)`. This starts a new execution context.
+
+### Backpack - (Persistent Lexical Static Scope Linked Data):
+Below in the backpack concept, `outer()` is returning the function `incrementCounter()`. `myNewFunciton` has  now become `incrementCounter`, 
+
+Now this is the cool part, what's being illustrated in the drawing is where it's looking for the `counter` variable in order to increment it. When it's stored inside a function like this, it has a `backpack` that carries it's individual scope, to keep everything separate. 
+
+![image](./images/backpack-concept.png)
+
+#### What can we call this 'backpack'?
+* Closed over 'Variable Environment' (C.O.V.E)
+* Persistent Lexical Scope Referenced Data (P.L.S.R.D)
+* 'Backpack'
+* 'Closure'
+
+The 'backpack' (or 'closure') of live data is attached `incrementCounter` (then to `MyNewFunction`) though a hidden party known as [(scope)] which persists when the inner function is returned out.
+
+*Below illustrates how the above can create powerful spots in memory that have it's own localized memory. I believe this is how frameworks like React are built upon. Essentially, each component is able to exist with it's own state, due to closure*
+
+![image](./images/backpack2.png)
