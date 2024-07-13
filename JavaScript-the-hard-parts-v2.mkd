@@ -67,13 +67,13 @@ const generatedFunc = createFunction();
 const result = generatedFun(3);
 ```
 
-what's happening above:
+What's happening above:
 
 1. `createFunction` is being declared and being stored in the global memory and is returning the `fn` `multiplyBy2`
 2. `generateFunction` is being declared and since `createFunction()` is returning `multiplyBy2`, that is what `generateFunction` is. **it becomes the function it is returning and that is all. There is no corelation to the name declared whatsoever because it has left the execution context**
 3. `result` is executing `generateFunction` with 3, in essence doing `multiplyBy2(3)`. This starts a new execution context.
 
-### Backpack - (Persistent Lexical Static Scope Linked Data):
+#### Backpack - (Persistent Lexical Static Scope Linked Data):
 Below in the backpack concept, `outer()` is returning the function `incrementCounter()`. `myNewFunciton` has  now become `incrementCounter`, 
 
 Now this is the cool part, what's being illustrated in the drawing is where it's looking for the `counter` variable in order to increment it. When it's stored inside a function like this, it has a `backpack` that carries it's individual scope, to keep everything separate. 
@@ -91,3 +91,55 @@ The 'backpack' (or 'closure') of live data is attached `incrementCounter` (then 
 *Below illustrates how the above can create powerful spots in memory that have it's own localized memory. I believe this is how frameworks like React are built upon. Essentially, each component is able to exist with it's own state, due to closure*
 
 ![image](./images/backpack2.png)
+
+#### Individual backpacks
+
+If we run 'outer' again and store the returned `incrementCounter` function definition in `anotherFunction`, this new `incrementCounter` function was created in a new execution context and therefore has a brand new independent backpack.
+
+#### Closure gives our functions persistent memories and entirely new toolkit for writing professional code
+
+**Helper functions:** Everyday professional helper functions like ‘once’ and ‘memoize’
+* 
+
+**Iterators and generators:** Which use lexical scoping and closure to achieve the most contemporary patterns for handling data in JavaScript
+
+**Module pattern:** Preserve state for the life of an application without polluting the global namespace
+
+**Asynchronous JavaScript:** Callbacks and Promises rely on closure to persist state in an asynchronous environment
+
+## Promises, Async & the Event Loop
+
+- **Promises** - the most significant ES6 feature
+- **Asynchronicity** - the feature that makes dynamic web applications possible
+- **The event loop** - JavaScript’s triage
+- **Microtask queue, Callback queue and Web Browser features (APIs)**o
+
+### Asynchronicity is the backbone of modern web development in JavaScript yet...
+
+JavaScript is:
+- Single threaded (one command runs at a time)
+- Synchronously executed (each line is run in order the code appears)
+
+So what if we have a task:
+- Accessing Twitter’s server to get new tweets that takes a long time
+- Code we want to run using those tweets
+
+**Challenge**: We want to wait for the tweets to be stored in tweets so that they’re there to run displayTweets on - but no code can run in the meantime
+
+### JavaScript is not enough - We need new pieces (some of which aren’t JavaScript at all)
+
+Our core JavaScript engine has 3 main parts:
+- Thread of execution
+- Memory/variable environment
+- Call stack
+
+We need to add some new components:
+- Web Browser APIs/Node background APIs
+- Promises
+- Event loop, Callback/Task queue and micro task queue
+
+
+**The crazy thing is, most of the things, (console, sockets, network request, document, setTimeout) aren't features of javascript, but features of the browser**
+
+#### Below it shows the relationship with Javascript and the web browser utilizing the `setTimeout()` function: 
+![image](./images/async1.png)
